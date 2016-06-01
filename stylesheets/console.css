@@ -1,0 +1,31 @@
+#console {
+  position: relative;
+  max-width: 1142px;
+  height: 648px;
+  margin: auto;
+  background: #282b2d; }
+  #console * {
+    font: bold 18px/30px "Consolas", monospace;
+    color: #ccc; }
+  #console #input {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    width: calc(100% - 40px);
+    border-top: solid #999 1px; }
+    #console #input #command-line {
+      background: #282b2d;
+      flex: 1;
+      width: auto;
+      border: none;
+      outline: none;
+      resize: none; }
+  #console #output {
+    position: relative; }
+    #console #output .command {
+      display: block; }
+    #console #output .response {
+      display: block; }
+
+/*# sourceMappingURL=console.css.map */

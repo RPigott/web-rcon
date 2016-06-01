@@ -1,0 +1,19 @@
+body > div {
+  width: 60%;
+  margin: auto;
+  padding: 20px; }
+
+input {
+  width: 100%; }
+
+input, textarea {
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px; }
+
+* {
+  box-sizing: border-box; }
+
+/*# sourceMappingURL=base.css.map */
