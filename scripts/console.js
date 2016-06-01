@@ -9,7 +9,8 @@ function commandLineInput(e) {
 		e.preventDefault();
 		this.value = "";
 		makeOutput('command', command);
-		execCommand(command);
+		var responseElement = makeOutput('response', '')
+		execCommand(command, responseElement);
 	};
 };
 
@@ -22,6 +23,7 @@ function makeOutput(cls, text) {
 
 	var output = document.getElementById('output');
 	output.appendChild(element);
+	return element;
 };
 
 function showCommand(command, response) {
@@ -60,7 +62,7 @@ function validate(data) {
 	return [true, 'OK']
 }
 
-function execCommand(command) {
+function execCommand(command, responseElement) {
 	var connection = document.forms["connection"];
 	var data = {
 		'host' : connection['host'].value,
@@ -78,7 +80,8 @@ function execCommand(command) {
 		'cgi-bin/send.py',
 		data,
 		function(response, status) {
-			makeOutput('response', response);
+			var responseText = document.createTextNode(response)
+			responseElement.appendChild(responseText);
 			console.log(status);
 		}
 	);

@@ -1,4 +1,6 @@
 #console {
+  display: flex;
+  flex-direction: column;
   position: relative;
   max-width: 1142px;
   height: 648px;
@@ -8,10 +10,11 @@
     font: bold 18px/30px "Consolas", monospace;
     color: #ccc; }
   #console #input {
-    position: absolute;
-    bottom: 0;
+    flex: none;
     display: flex;
     align-items: center;
+    position: absolute;
+    bottom: 0;
     width: calc(100% - 40px);
     border-top: solid #999 1px; }
     #console #input #command-line {
@@ -22,7 +25,26 @@
       outline: none;
       resize: none; }
   #console #output {
-    position: relative; }
+    flex-grow: 1;
+    flex-shrink: 0;
+    overflow: scroll;
+    position: relative;
+    white-space: pre-wrap;
+    margin: 0; }
+    #console #output::-webkit-scrollbar, #console #output::-webkit-scrollbar-button, #console #output::-webkit-scrollbar-track, #console #output::-webkit-scrollbar-track-piece, #console #output::-webkit-scrollbar-thumb, #console #output::-webkit-scrollbar-corner, #console #output::-webkit-resizer {
+      background: transparent; }
+    #console #output::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+      border-radius: 4px; }
+    #console #output::-webkit-scrollbar-track-piece {
+      border-radius: 5px; }
+    #console #output::-webkit-scrollbar-thumb {
+      background: #4f4f4f;
+      border-radius: 5px; }
+    #console #output::-webkit-scrollbar-button {
+      width: 0;
+      height: 0; }
     #console #output .command, #console #output .response, #console #output .error {
       display: block; }
     #console #output .error {
