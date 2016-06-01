@@ -23,9 +23,9 @@
       resize: none; }
   #console #output {
     position: relative; }
-    #console #output .command {
+    #console #output .command, #console #output .response, #console #output .error {
       display: block; }
-    #console #output .response {
-      display: block; }
+    #console #output .error {
+      color: #f77; }
 
 /*# sourceMappingURL=console.css.map */

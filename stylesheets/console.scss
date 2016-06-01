@@ -1,6 +1,8 @@
 
 $console-bg: #282b2d;
 $console-font: bold 18px/30px "Consolas", monospace;
+$console-plain: #ccc;
+$console-error: #f77;
 
 #console {
 	position: relative;
@@ -13,7 +15,7 @@ $console-font: bold 18px/30px "Consolas", monospace;
 
 	* {
 		font: $console-font;
-		color: #ccc
+		color: $console-plain
 	}
 
 	#input {
@@ -38,12 +40,20 @@ $console-font: bold 18px/30px "Consolas", monospace;
 	#output {
 		position: relative;
 
-		.command {
+		.command, .response, .error {
 			display: block;
 		}
 
+		.command {
+
+		}
+
 		.response {
-			display: block;
+
+		}
+
+		.error {
+			color: $console-error
 		}
 	}
 }
