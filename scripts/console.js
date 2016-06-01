@@ -23,27 +23,8 @@ function makeOutput(cls, text) {
 
 	var output = document.getElementById('output');
 	output.appendChild(element);
+	output.scrollTop = output.scrollHeight;
 	return element;
-};
-
-function showCommand(command, response) {
-	var commandElement = document.createElement('span');
-	commandElement.classList.add('command');
-	var commandText = document.createTextNode(command);
-	commandElement.appendChild(commandText);
-
-	var output = document.getElementById('output');
-	output.appendChild(commandElement);
-};
-
-function showResponse(response) {
-	var responseElement = document.createElement('span');
-	responseElement.classList.add('response');
-	var responseText = document.createTextNode(response)
-	responseElement.appendChild(responseText);
-
-	var output = document.getElementById('output');
-	output.appendChild(responseElement);
 };
 
 function validate(data) {
@@ -82,6 +63,7 @@ function execCommand(command, responseElement) {
 		function(response, status) {
 			var responseText = document.createTextNode(response)
 			responseElement.appendChild(responseText);
+			output.scrollTop = output.scrollHeight;
 			console.log(status);
 		}
 	);
