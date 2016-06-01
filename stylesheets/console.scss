@@ -28,11 +28,7 @@ $console-error: #f77;
 		display: flex;
 		align-items: center;
 
-		
-
-		position: absolute;
-		bottom: 0;
-		width: calc(100% - 40px);
+		width: 100%;
 		border-top: solid #999 1px;
 
 		#command-line {
@@ -47,8 +43,8 @@ $console-error: #f77;
 	}
 
 	#output {
-		flex-grow: 1;
-		flex-shrink: 0;
+		flex: 1;
+		height: 100%;
 		overflow: scroll;
 		position: relative;
 		white-space: pre-wrap;
