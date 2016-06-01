@@ -47,9 +47,9 @@ function execCommand(command, responseElement) {
 	var connection = document.forms["connection"];
 	var data = {
 		'host' : connection['host'].value,
-		'port' : connection['port'].value || "",
+		'port' : connection['port'].value,
 		'password' : connection['password'].value,
-		'command' : command,
+		'command' : command || "",
 	};
 
 	var [validated, message] = validate(data);
@@ -57,15 +57,23 @@ function execCommand(command, responseElement) {
 	if (!validated) {
 		makeOutput('error', "Error: " + message)
 	} else {
-	$.post(
-		'cgi-bin/send.py',
-		data,
-		function(response, status) {
+	$.ajax({
+		'type' : 'POST',
+		'url': 'cgi-bin/send.py',
+		'data' : data,
+		'success' : function(response, status, xhr) {
 			var responseText = document.createTextNode(response)
 			responseElement.appendChild(responseText);
-			output.scrollTop = output.scrollHeight;
 			console.log(status);
+			console.log(response);
+		},
+		'error': function(xhr, status, errorThrown) {
+			console.log(errorThrown);
+		},
+		'complete': function(xhr, status) {
+			output.scrollTop = output.scrollHeight;
 		}
+	}
 	);
 	};
 };

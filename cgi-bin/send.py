@@ -2,7 +2,7 @@
 
 # CGI env
 import cgi, cgitb
-cgitb.enable()
+cgitb.enable(display=0, logdir="/logs/cgi-errors.log")
 
 # RCON protocol
 import socket, struct
@@ -38,9 +38,20 @@ def authenticate(sock, password):
 	body, ID, Type = read_rcon_packet(resp)
 	return ID == AUTH_ID
 
-# Header
-print("Content-Type: text/html")
-print()
+class AuthenticationError(Exception):
+	pass
+
+# HTTP
+def respond(headers, content):
+	print('\r\n'.join(headers))
+	print('\r\n')
+	print(content)
+	exit(0)
+
+def HTTPError(status = 500, message = ""):
+	return 'HTTP/1.1 {} {}'.format(status, message)
+
+headers = ["Content-Type: text/html"]
 
 # Form data
 try:
@@ -51,17 +62,18 @@ try:
 	body = form['command'].value
 except KeyError as e:
 	key = e.args[0]
-	print("Oops! You need to provide a {}!".format(key))
-	exit(0)
-
+	message = 'Oops! You must provide a {}'.format(key)
+	headers.append(HTTPError(400))
+	respond(headers, message)
 # Response
-with socket.socket() as console:
+try:
+	console = socket.socket()
 	console.connect( (host, port) )
 	authenticated = authenticate(console, password)
 
 	if not authenticated:
-		print('Password rejected by server')
-		exit(0)
+		headers.append(HTTPError(500))
+		respond(headers, 'Password rejected by server.')
 
 	command = make_rcon_packet(body)
 	console.send(command)
@@ -69,4 +81,13 @@ with socket.socket() as console:
 	body, ID, Type = read_rcon_packet(resp)
 	response = body.decode('ascii')
 
-	print(response)
+	respond(headers, response)
+	
+except socket.timeout as e:
+	headers.append(HTTPError(504))
+	respond(headers, 'Error:' + e.strerror)
+except Exception as e:
+	headers.append(HTTPError(500))
+	respond(headers, '')
+finally:
+	console.close()
