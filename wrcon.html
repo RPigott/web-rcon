@@ -3,6 +3,8 @@
 
 <head>
 
+<title>Web RCON tool</title>
+
 <link rel="stylesheet" type="text/css" href="stylesheets/base.css">
 <link rel="stylesheet" type="text/css" href="stylesheets/console.css">
 
@@ -14,10 +16,10 @@
 <body>
 
 <div>
-	<form name="connection" action="cgi-bin/send.py" method="POST">
-		Host:     <input type="text" name="host">
-		Port:     <input type="text" name="port" value="25575">
-		Password: <input type="password" name="password">
+	<form name="connection">
+		Host:     <input type="text" name="host" required>
+		Port:     <input type="text" name="port" value="25575" required>
+		Password: <input type="password" name="password" required>
 	</form>
 </div>
 

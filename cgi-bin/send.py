@@ -4,8 +4,6 @@
 import cgi, cgitb
 cgitb.enable()
 
-# cgi.test()
-
 # RCON protocol
 import socket, struct
 
@@ -40,18 +38,23 @@ def authenticate(sock, password):
 	body, ID, Type = read_rcon_packet(resp)
 	return ID == AUTH_ID
 
-
-# Form data
-form = cgi.FieldStorage()
-host = form['host'].value
-port = int(form['port'].value)
-password = form['password'].value
-body = form['command'].value
-
-# Response
+# Header
 print("Content-Type: text/html")
 print()
 
+# Form data
+try:
+	form = cgi.FieldStorage()
+	host = form['host'].value
+	port = int(form['port'].value)
+	password = form['password'].value
+	body = form['command'].value
+except KeyError as e:
+	key = e.args[0]
+	print("Oops! You need to provide a {}!".format(key))
+	exit(0)
+
+# Response
 with socket.socket() as console:
 	console.connect( (host, port) )
 	authenticated = authenticate(console, password)
