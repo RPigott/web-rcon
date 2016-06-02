@@ -5,6 +5,7 @@
   max-width: 1142px;
   height: 648px;
   margin: auto;
+  padding: 20px 20px 0px 20px;
   background: #282b2d; }
   #console * {
     font: bold 18px/30px "Consolas", monospace;

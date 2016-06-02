@@ -43,6 +43,19 @@ function validate(data) {
 	return [true, 'OK']
 }
 
+function clearOutput() {
+	var child = output.lastChild()
+	while (child) {
+		output.removeChild(child)
+		child = output.lastChild()
+	}
+}
+
+var specialCommands = {
+	'!clear' : clearOutput,
+	'!help'  : displayHelp,
+}
+
 function execCommand(command, responseElement) {
 	var connection = document.forms["connection"];
 	var data = {
@@ -62,10 +75,10 @@ function execCommand(command, responseElement) {
 		'url': 'cgi-bin/send.py',
 		'data' : data,
 		'success' : function(response, status, xhr) {
-			var responseText = document.createTextNode(response)
-			responseElement.appendChild(responseText);
-			console.log(status);
-			console.log(response);
+			if (response != "") {
+				var responseText = document.createTextNode(response);
+				responseElement.appendChild(responseText);
+			}
 		},
 		'error': function(xhr, status, errorThrown) {
 			console.log(errorThrown);
