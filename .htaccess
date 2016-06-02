@@ -2,3 +2,4 @@ RewriteEngine On
 RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ /~rpigott/web-rcon/run.fcgi/$1 [QSA,L]
+
