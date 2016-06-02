@@ -45,7 +45,8 @@
       width: 0;
       height: 0; }
     #console #output .command, #console #output .response, #console #output .error {
-      display: block; }
+      display: block;
+      white-space: pre-wrap; }
     #console #output .error {
       color: #f77; }
 
