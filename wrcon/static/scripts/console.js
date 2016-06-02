@@ -51,6 +51,12 @@ function clearOutput() {
 	}
 }
 
+function displayHelp(responseElement) {
+	var help = "No help message yet. Sucks to suck.";
+	var helpText = document.createTextNode(help);
+	responseElement.appendChild(helpText)
+}
+
 var specialCommands = {
 	'!clear' : clearOutput,
 	'!help'  : displayHelp,
@@ -72,7 +78,7 @@ function execCommand(command, responseElement) {
 	} else {
 	$.ajax({
 		'type' : 'POST',
-		'url': 'cgi-bin/send.py',
+		'url': '/send',
 		'data' : data,
 		'success' : function(response, status, xhr) {
 			if (response != "") {

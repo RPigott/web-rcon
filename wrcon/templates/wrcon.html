@@ -4,13 +4,13 @@
 <head>
 
 <title>Web RCON tool</title>
-<link rel="icon" href="/resources/favicon.ico">
+<link rel="icon" href= "{{ url_for('static', filename='images/favicon.ico') }}">
 
-<link rel="stylesheet" type="text/css" href="stylesheets/base.css">
-<link rel="stylesheet" type="text/css" href="stylesheets/console.css">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/base.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/console.css') }}">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<script type="text/javascript" src="scripts/console.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/console.js') }}"></script>
 
 </head>
 

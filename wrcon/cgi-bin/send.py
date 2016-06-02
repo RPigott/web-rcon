@@ -1,13 +1,9 @@
 #!usr/bin/env python
 
-# CGI env
-import cgi, cgitb
-cgitb.enable(display=0, logdir="/logs/cgi-errors.log")
-
-# RCON protocol
+# Python implementation of the Valve Source RCON Protocol
 import socket, struct
 
-# ID
+# IDs
 DEFAULT_ID = 1
 AUTH_ID = 2 # Not really necessary
 
@@ -37,6 +33,29 @@ def authenticate(sock, password):
 	resp = sock.recv(1024)
 	body, ID, Type = read_rcon_packet(resp)
 	return ID == AUTH_ID
+
+def send_one_command(host, port, password, body):
+	try:
+		console = socket.socket()
+		console.connect( (host, port) )
+		authenticated = authenticate(console, password)
+
+		if not authenticated:
+			raise AuthenticationError
+
+		command = make_rcon_packet(body)
+		console.send(command)
+		resp = console.recv(4096)
+		body, ID, Type = read_rcon_packet(resp)
+		response = body.decode('ascii')
+
+		return True, response
+	except OSError as err:
+		return False, err.strerror
+	except Error as err:
+		return False, repr(err)
+
+
 
 class AuthenticationError(Exception):
 	pass

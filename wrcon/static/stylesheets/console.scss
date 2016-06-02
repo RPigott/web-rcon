@@ -83,6 +83,7 @@ $console-error: #f77;
 
 		.command, .response, .error {
 			display: block;
+			white-space: pre-wrap;
 		}
 
 		.command {
