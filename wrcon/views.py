@@ -21,6 +21,6 @@ def send():
 	success, response = send_one_command(host, port, password, body)
 
 	# Respond
-	return response
+	return response, 200 if success else 500, []
 
 

@@ -87,13 +87,15 @@ function execCommand(command, responseElement) {
 			}
 		},
 		'error': function(xhr, status, errorThrown) {
-			console.log(errorThrown);
+			var responseText = document.createTextNode('Error: ' + xhr.responseText)
+			$(responseElement).removeClass('response')
+			responseElement.classList.add('error')
+			responseElement.appendChild(responseText)
 		},
 		'complete': function(xhr, status) {
 			output.scrollTop = output.scrollHeight;
-		}
-	}
-	);
+		},
+	});
 	};
 };
 
