@@ -9,6 +9,10 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/base.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/console.css') }}">
 
+<script type=text/javascript>
+  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='scripts/console.js') }}"></script>
 

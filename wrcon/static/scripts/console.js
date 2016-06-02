@@ -78,7 +78,7 @@ function execCommand(command, responseElement) {
 	} else {
 	$.ajax({
 		'type' : 'POST',
-		'url': '/send',
+		'url': $SCRIPT_ROOT + '/send',
 		'data' : data,
 		'success' : function(response, status, xhr) {
 			if (response != "") {
