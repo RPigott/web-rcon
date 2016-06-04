@@ -55,5 +55,7 @@ def send_one_command(host, port, password, body):
 		return True, response
 	except OSError as err:
 		return False, err.strerror
+	except AuthenticationError as err:
+		return False, "Password rejected by server"
 	except Exception as err:
 		return False, repr(err)
