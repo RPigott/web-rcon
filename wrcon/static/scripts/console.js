@@ -1,7 +1,5 @@
 /* globals $SCRIPT_ROOT */
 
-$(document).ready( function() {
-
 const ENTER = 13;
 const ESC   = 27;
 const UP    = 38;
@@ -9,7 +7,9 @@ const DOWN  = 40;
 
 function direction(dir) {
 	return 39 - dir;
-}
+};
+
+$(document).ready( function() {
 
 var Console = {
 
@@ -34,7 +34,7 @@ var Console = {
 	},
 
 	'commandLineInput' : function (e) {
-		if (e.which === ENTER) {
+		if (e.which === ENTER && !e.shiftKey) {
 			e.preventDefault()
 			this.submitCommand()
 		} else if (e.which === ESC) {

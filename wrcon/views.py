@@ -22,5 +22,3 @@ def send():
 
 	# Respond
 	return response, 200 if success else 500, []
-
-
