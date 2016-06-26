@@ -11,6 +11,7 @@
 
 <script type=text/javascript>
   $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+  $SEND_URL = {{ url_for('send')|tojson|safe }};
 </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
