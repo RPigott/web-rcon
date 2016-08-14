@@ -1,4 +1,4 @@
-#!usr/bin/env python
+#!/usr/bin/env python
 
 # Python implementation of the Valve Source RCON Protocol
 import socket, struct
@@ -30,9 +30,9 @@ def read_rcon_packet(packet):
 	return body, ID, Type
 
 def authenticate(sock, password):
-	auth = make_rcon_packet(password, ID = AUTH_ID, Type = SERVERDATA_AUTH)
+	auth_packet = make_rcon_packet(password, ID = AUTH_ID, Type = SERVERDATA_AUTH)
 
-	sock.sendall(auth)
+	sock.sendall(auth_packet)
 	resp = sock.recv(1024)
 	body, ID, Type = read_rcon_packet(resp)
 	return ID == AUTH_ID

@@ -1,4 +1,4 @@
-/* globals $SCRIPT_ROOT */
+/* globals $SCRIPT_ROOT, $SEND_URL */
 
 const ENTER = 13;
 const ESC   = 27;
@@ -162,7 +162,7 @@ var Console = {
 			var me = this;
 			$.ajax({
 				'type' : 'POST',
-				'url': $SCRIPT_ROOT + '/send',
+				'url': $SCRIPT_ROOT + $SEND_URL,
 				'data' : data,
 				'success' : function(response, status, xhr) {
 					if (response != "") {
